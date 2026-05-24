@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <raymath.h>
 
-Card::Card(Vector2 aPosition, int aRank, Suit aSuit, bool isVisible)
+Card::Card(int aRank, Suit aSuit, bool isVisible)
 {
     if(aRank < 1 || aRank > 13)
     {
@@ -16,8 +16,6 @@ Card::Card(Vector2 aPosition, int aRank, Suit aSuit, bool isVisible)
 
     width = spriteWidth * scaling;
     height = spriteHeight * scaling;
-
-    position = aPosition;
 
     rank = aRank;
     suit = aSuit;
@@ -36,7 +34,7 @@ void Card::TurnFaceDown()
     isFaceUp = false;
 }
 
-void Card::Draw(const Texture2D &spritesheet, bool debugMode)
+void Card::Draw(Vector2 position, const Texture2D &spritesheet, bool debugMode)
 {
     float x_offset = (isFaceUp ? (float)(rank - 1) : 13.0) * spriteWidth;
     float y_offset = (isFaceUp ? (float)suitIndex : 3.0) * spriteHeight;
@@ -48,7 +46,7 @@ void Card::Draw(const Texture2D &spritesheet, bool debugMode)
 
     if(debugMode)
     {
-        Rectangle hitbox = GetHitBox();
+        Rectangle hitbox = GetHitBox(position);
         DrawRectangleLines(hitbox.x, hitbox.y, hitbox.width, hitbox.height, GREEN);
     }
 }
@@ -68,26 +66,16 @@ int Card::GetSuitIndex()
     return suitIndex;
 }
 
-Rectangle Card::GetBoundaries() const
+Vector2 Card::GetDimensions() const
 {
-    return {position.x, position.y, width, height};
+    return {width, height};
 }
 
-Rectangle Card::GetHitBox() const
+Rectangle Card::GetHitBox(Vector2 position) const
 {
     float x = position.x + width / 4.0f;
     float y = position.y + height / 4.0f;
     return {x, y, width / 2.0F, height / 2.0f};
-}
-
-void Card::SetPosition(Vector2 &newPosition)
-{
-    position = newPosition;
-}
-
-bool Card::CheckCollision(const Card &other)
-{
-    return CheckCollisionRecs(this->GetHitBox(), other.GetHitBox());
 }
 
 // Whether or not other card can be placed on top of this card

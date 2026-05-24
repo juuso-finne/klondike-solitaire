@@ -37,7 +37,7 @@ void Deck::Generate()
 
     for (Suit suit : suits){
         for(int rank = 1; rank < 14; rank++){
-            cards.push_back(Card(position, rank, suit));
+            cards.push_back(Card(rank, suit));
         }
     }
 }
@@ -57,7 +57,6 @@ void Deck::Append(const std::vector<Card> &newCards)
 {
     for (Card c: newCards)
     {
-        c.SetPosition(position);
         c.TurnFaceDown();
         cards.insert(cards.end(), c);
     }
