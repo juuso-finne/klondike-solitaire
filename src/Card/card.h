@@ -25,6 +25,7 @@ class Card
 
         Rectangle GetBoundaries() const;
         Rectangle GetHitBox() const;
+        void SetPosition(Vector2 &newPosition);
 
         bool CheckCollision(const Card &other);
         bool CheckAccommodation(const Card &other);

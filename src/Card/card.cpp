@@ -39,7 +39,7 @@ void Card::TurnFaceDown()
 void Card::Draw(const Texture2D &spritesheet, bool debugMode)
 {
     float x_offset = (isFaceUp ? (float)(rank - 1) : 13.0) * spriteWidth;
-    float y_offset = (isFaceUp ? (float)suitIndex : 3.0) * spriteWidth;
+    float y_offset = (isFaceUp ? (float)suitIndex : 3.0) * spriteHeight;
 
     Rectangle source = {x_offset, y_offset, spriteWidth, spriteHeight};
     Rectangle dest = {position.x, position.y, width, height};
@@ -48,7 +48,8 @@ void Card::Draw(const Texture2D &spritesheet, bool debugMode)
 
     if(debugMode)
     {
-        DrawRectangleRec(this->GetHitBox(), GREEN);
+        Rectangle hitbox = GetHitBox();
+        DrawRectangleLines(hitbox.x, hitbox.y, hitbox.width, hitbox.height, GREEN);
     }
 }
 
@@ -77,6 +78,11 @@ Rectangle Card::GetHitBox() const
     float x = position.x + width / 4.0f;
     float y = position.y + height / 4.0f;
     return {x, y, width / 2.0F, height / 2.0f};
+}
+
+void Card::SetPosition(Vector2 &newPosition)
+{
+    position = newPosition;
 }
 
 bool Card::CheckCollision(const Card &other)
