@@ -2,20 +2,20 @@
 #include <stdexcept>
 #include <raymath.h>
 
+    float Card::spriteWidth = 75.0f;
+    float Card::spriteHeight = 112.0f;
+
+    const float scaling = 1.5f;
+
+    float Card::width = spriteWidth * scaling;
+    float Card::height = spriteHeight * scaling;
+
 Card::Card(int aRank, Suit aSuit, bool isVisible)
 {
     if(aRank < 1 || aRank > 13)
     {
         throw std::invalid_argument("Card.cpp: Card rank must be between 1 and 13 (incl.)");
     }
-
-    spriteWidth = 75.0f;
-    spriteHeight = 112.0f;
-
-    const float scaling = 1.5f;
-
-    width = spriteWidth * scaling;
-    height = spriteHeight * scaling;
 
     rank = aRank;
     suit = aSuit;
@@ -66,12 +66,12 @@ int Card::GetSuitIndex()
     return suitIndex;
 }
 
-Vector2 Card::GetDimensions() const
+Vector2 Card::GetDimensions()
 {
     return {width, height};
 }
 
-Rectangle Card::GetHitBox(Vector2 position) const
+Rectangle Card::GetHitBox(Vector2 position)
 {
     float x = position.x + width / 4.0f;
     float y = position.y + height / 4.0f;

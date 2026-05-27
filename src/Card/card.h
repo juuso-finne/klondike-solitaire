@@ -23,8 +23,8 @@ class Card
         int GetRank();
         int GetSuitIndex();
 
-        Vector2 GetDimensions() const;
-        Rectangle GetHitBox(Vector2 position) const;
+        static Vector2 GetDimensions();
+        static Rectangle GetHitBox(Vector2 position);
 
         bool CheckAccommodation(const Card &other);
 
@@ -36,9 +36,9 @@ class Card
 
         Suit suit;
 
-        float spriteWidth;
-        float spriteHeight;
+        static float spriteWidth;
+        static float spriteHeight;
 
-        float width;
-        float height;
+        static float width;
+        static float height;
 };
