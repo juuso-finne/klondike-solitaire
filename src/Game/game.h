@@ -11,7 +11,10 @@ class Game
         Game();
 
         void Reset();
+        void Update();
         void Draw(bool debugMode = false);
+
+        void clickHandler();
 
         GameSettings settings;
         DrawHandler drawHandler;

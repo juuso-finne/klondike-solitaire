@@ -30,6 +30,14 @@ void Game::Reset()
     }
 }
 
+void Game::Update()
+{
+    if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+    {
+        clickHandler();
+    }
+}
+
 void Game::Draw(bool debugMode)
 {
     drawHandler.Draw(debugMode);
