@@ -5,7 +5,7 @@
 
 class Deck{
     public:
-        Deck(Vector2 position);
+        Deck();
         void Shuffle();
         bool IsEmpty();
         void Reset();
@@ -15,6 +15,5 @@ class Deck{
         std::vector<Card> DealN(int n);
     private:
         std::vector<Card> cards;
-        Vector2 position;
         void Generate();
 };

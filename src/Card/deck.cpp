@@ -3,10 +3,9 @@
 #include <stdexcept>
 #include "deck.h"
 
-Deck::Deck(Vector2 aPosition)
+Deck::Deck()
 {
     cards = std::vector<Card>{};
-    position = aPosition;
     Reset();
 }
 

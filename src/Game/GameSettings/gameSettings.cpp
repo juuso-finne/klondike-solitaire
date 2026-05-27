@@ -2,6 +2,6 @@
 
 GameSettings::GameSettings()
 {
-    cardStagger = 30.0f;
+    cardStagger = 25.0f;
     margin = 20.0f;
 }
