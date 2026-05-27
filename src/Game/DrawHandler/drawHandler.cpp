@@ -9,7 +9,10 @@ DrawHandler::DrawHandler(Game *aGame)
 
 void DrawHandler::Draw(bool debugMode)
 {
+    BeginDrawing();
+    ClearBackground(BLACK);
     DrawGame(debugMode);
+    EndDrawing();
 }
 
 void DrawHandler::DrawGame(bool debugMode)

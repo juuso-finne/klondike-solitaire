@@ -12,17 +12,10 @@ int main()
     Game game = Game();
     SetTargetFPS(60);
 
-
-/*     Deck d = Deck({0,0});
-    Column col = Column({100, 200}, d.DealN(20)); */
-
     while (!WindowShouldClose())
     {
-        BeginDrawing();
-        ClearBackground(BLACK);
         game.Update();
         game.Draw();
-        EndDrawing();
     }
 
     CloseWindow();
