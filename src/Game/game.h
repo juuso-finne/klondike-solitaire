@@ -17,5 +17,5 @@ class Game
         DrawHandler drawHandler;
 
         Deck deck;
-        std::vector<Column> columns;
+        std::vector<FixedColumn> columns;
 };

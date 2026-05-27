@@ -14,7 +14,7 @@ void DrawHandler::Draw()
 
 void DrawHandler::DrawGame()
 {
-    for (Column col : game->columns)
+    for (FixedColumn col : game->columns)
     {
         col.Draw(game->settings.cardStagger, cardSpriteSheet);
     }

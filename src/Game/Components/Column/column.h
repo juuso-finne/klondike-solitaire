@@ -8,12 +8,23 @@ class Game;
 class Column
 {
     friend class Game;
-
     public:
-    Column(Vector2 aPosition, std::vector<Card> aCards);
-    void Draw(float stagger, Texture2D &spritesheet, bool debugMode = false);
 
-    Vector2 position;
-    std::vector<Card> cards;
 
+    protected:
+        Vector2 position;
+        std::vector<Card> cards;
+        Column(Vector2 aPosition, std::vector<Card> aCards);
+        void Draw(float stagger, Texture2D &spritesheet, bool debugMode = false);
+
+};
+
+class FixedColumn: public Column
+{
+    friend class Game;
+    public:
+        void Draw(float stagger, Texture2D &spritesheet, bool debugMode = false);
+
+    protected:
+        FixedColumn(Vector2 aPosition, std::vector<Card> aCards);
 };

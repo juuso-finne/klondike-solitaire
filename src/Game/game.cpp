@@ -8,7 +8,7 @@ Game::Game(): drawHandler(this)
         float x = GetScreenWidth() - (settings.margin + cardSize.x) * (7 - i);
         float y = cardSize.y + 2 * settings.margin;
 
-        Column c = Column({x, y}, {});
+        FixedColumn c = FixedColumn({x, y}, {});
         columns.push_back(c);
     }
 
@@ -20,7 +20,7 @@ void Game::Reset()
     deck = Deck();
 
     for (std::size_t i = 0; i < columns.size(); i++){
-        Column *c = &columns[i];
+        FixedColumn *c = &columns[i];
         c -> cards = deck.DealN(i + 1);
 
         if (!c -> cards.empty())
