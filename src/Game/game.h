@@ -11,7 +11,7 @@ class Game
         Game();
 
         void Reset();
-        void Draw();
+        void Draw(bool debugMode = false);
 
         GameSettings settings;
         DrawHandler drawHandler;

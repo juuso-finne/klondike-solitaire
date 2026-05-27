@@ -7,15 +7,15 @@ DrawHandler::DrawHandler(Game *aGame)
     cardSpriteSheet = LoadTexture("assets/graphics/card_spritesheet.png");
 }
 
-void DrawHandler::Draw()
+void DrawHandler::Draw(bool debugMode)
 {
-    DrawGame();
+    DrawGame(debugMode);
 }
 
-void DrawHandler::DrawGame()
+void DrawHandler::DrawGame(bool debugMode)
 {
     for (FixedColumn col : game->columns)
     {
-        col.Draw(game->settings.cardStagger, cardSpriteSheet);
+        col.Draw(game->settings.cardStagger, cardSpriteSheet, debugMode);
     }
 }

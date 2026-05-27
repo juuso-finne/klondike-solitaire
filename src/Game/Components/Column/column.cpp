@@ -19,6 +19,19 @@ void Column::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
 FixedColumn::FixedColumn(Vector2 aPosition, std::vector<Card> aCards):Column(aPosition, aCards)
 {}
 
+Rectangle FixedColumn::GetBoundaries(float stagger)
+{
+    if (cards.empty()){
+        return {0,0,0,0};
+    }
+
+    Vector2 cardSize = Card::GetDimensions();
+
+    float height = (cards.size() - 1) * stagger + cardSize.y;
+
+    return {position.x, position.y, cardSize.x, height};
+}
+
 void FixedColumn::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
 {
     if (cards.empty())
@@ -28,5 +41,10 @@ void FixedColumn::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
     } else
     {
         Column::Draw(stagger, spritesheet, debugMode);
+    }
+
+    if(debugMode)
+    {
+        DrawRectangleLinesEx(GetBoundaries(stagger), 1.0f, RED);
     }
 }

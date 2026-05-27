@@ -10,7 +10,7 @@ class DrawHandler
         Game *game;
         Texture2D cardSpriteSheet;
 
-        void Draw();
+        void Draw(bool debugMode = false);
 
-        void DrawGame();
+        void DrawGame(bool debugMode = false);
 };

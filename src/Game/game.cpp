@@ -30,7 +30,7 @@ void Game::Reset()
     }
 }
 
-void Game::Draw()
+void Game::Draw(bool debugMode)
 {
-    drawHandler.Draw();
+    drawHandler.Draw(debugMode);
 }
