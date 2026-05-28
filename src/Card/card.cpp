@@ -2,13 +2,13 @@
 #include <stdexcept>
 #include <raymath.h>
 
-    float Card::spriteWidth = 75.0f;
-    float Card::spriteHeight = 112.0f;
+float Card::spriteWidth = 75.0f;
+float Card::spriteHeight = 112.0f;
 
-    const float scaling = 1.5f;
+const float scaling = 1.5f;
 
-    float Card::width = spriteWidth * scaling;
-    float Card::height = spriteHeight * scaling;
+float Card::width = spriteWidth * scaling;
+float Card::height = spriteHeight * scaling;
 
 Card::Card(int aRank, Suit aSuit, bool isVisible)
 {

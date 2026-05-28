@@ -20,11 +20,11 @@ void DrawHandler::DrawGame(bool debugMode)
 
     for (FixedColumn col : game->columns)
     {
-        col.Draw(game->settings.cardStagger, cardSpriteSheet, debugMode);
+        col.Draw(cardSpriteSheet, debugMode);
     }
 
     if(game->isDragging)
     {
-        game->draggedColumn.Draw(game->settings.cardStagger, cardSpriteSheet, debugMode);
+        game->draggedColumn.Draw(cardSpriteSheet, debugMode);
     }
 }

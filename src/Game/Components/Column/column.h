@@ -9,10 +9,13 @@ class Column
 {
     friend class Game;
     public:
-        void Draw(float stagger, Texture2D &spritesheet, bool debugMode = false);
+        void Draw(Texture2D &spritesheet, bool debugMode = false);
 
 
     protected:
+
+        static float stagger;
+
         Vector2 position;
         std::vector<Card> cards;
         Column();
@@ -24,12 +27,12 @@ class FixedColumn: public Column
 {
     friend class Game;
     public:
-        void Draw(float stagger, Texture2D &spritesheet, bool debugMode = false);
+        void Draw(Texture2D &spritesheet, bool debugMode = false);
 
     protected:
         FixedColumn(Vector2 aPosition, std::vector<Card> aCards);
-        Rectangle GetBoundaries(float stagger);
-        std::size_t FindClickedIndex(float stagger);
-        std::vector<Card> DetachCards(float stagger, std::size_t startIndex);
-        Vector2 FindCardPosition(float stagger, std::size_t cardIndex);
+        Rectangle GetBoundaries();
+        std::size_t FindClickedIndex();
+        std::vector<Card> DetachCards(std::size_t startIndex);
+        Vector2 FindCardPosition(std::size_t cardIndex);
 };

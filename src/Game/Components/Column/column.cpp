@@ -1,6 +1,8 @@
 #include "column.h"
 #include <raymath.h>
 
+float Column::stagger = 25.0f;
+
 Column::Column()
 {
     cards = {};
@@ -13,7 +15,7 @@ Column::Column(Vector2 aPosition, std::vector<Card> aCards)
     position = aPosition;
 }
 
-void Column::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
+void Column::Draw(Texture2D &spritesheet, bool debugMode)
 {
     for (std::size_t i = 0; i < cards.size(); i++)
     {
@@ -25,7 +27,7 @@ void Column::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
 FixedColumn::FixedColumn(Vector2 aPosition, std::vector<Card> aCards):Column(aPosition, aCards)
 {}
 
-Rectangle FixedColumn::GetBoundaries(float stagger)
+Rectangle FixedColumn::GetBoundaries()
 {
     if (cards.empty()){
         return {0,0,0,0};
@@ -38,7 +40,7 @@ Rectangle FixedColumn::GetBoundaries(float stagger)
     return {position.x, position.y, cardSize.x, height};
 }
 
-void FixedColumn::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
+void FixedColumn::Draw(Texture2D &spritesheet, bool debugMode)
 {
     if (cards.empty())
     {
@@ -46,16 +48,16 @@ void FixedColumn::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
         DrawRectangleRoundedLines({position.x, position.y, cardSize.x, cardSize.y}, 0.2f, 2, WHITE);
     } else
     {
-        Column::Draw(stagger, spritesheet, debugMode);
+        Column::Draw(spritesheet, debugMode);
     }
 
     if(debugMode)
     {
-        DrawRectangleLinesEx(GetBoundaries(stagger), 1.0f, RED);
+        DrawRectangleLinesEx(GetBoundaries(), 1.0f, RED);
     }
 }
 
-std::size_t FixedColumn::FindClickedIndex(float stagger)
+std::size_t FixedColumn::FindClickedIndex()
 {
     for(std::size_t i = cards.size() - 1; i >= 0; i--)
     {
@@ -68,7 +70,7 @@ std::size_t FixedColumn::FindClickedIndex(float stagger)
     return 0;
 }
 
-std::vector<Card> FixedColumn::DetachCards(float stagger, std::size_t startIndex)
+std::vector<Card> FixedColumn::DetachCards(std::size_t startIndex)
 {
     if (!cards[startIndex].isFaceUp)
     {
@@ -94,7 +96,7 @@ std::vector<Card> FixedColumn::DetachCards(float stagger, std::size_t startIndex
     return output;
 }
 
-Vector2 FixedColumn::FindCardPosition(float stagger, std::size_t cardIndex)
+Vector2 FixedColumn::FindCardPosition(std::size_t cardIndex)
 {
     return Vector2Add(position, {0, cardIndex * stagger});
 }
