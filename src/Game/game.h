@@ -21,4 +21,11 @@ class Game
 
         Deck deck;
         std::vector<FixedColumn> columns;
+
+        bool isDragging;
+        Column draggedColumn;
+
+        void startDragging(Column c);
+        void stopDragging();
+        void updateDragging();
 };

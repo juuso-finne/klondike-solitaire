@@ -1,6 +1,12 @@
 #include "column.h"
 #include <raymath.h>
 
+Column::Column()
+{
+    cards = {};
+    position = {0,0};
+}
+
 Column::Column(Vector2 aPosition, std::vector<Card> aCards)
 {
     cards = aCards;

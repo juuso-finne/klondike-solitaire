@@ -17,8 +17,14 @@ void DrawHandler::Draw(bool debugMode)
 
 void DrawHandler::DrawGame(bool debugMode)
 {
+
     for (FixedColumn col : game->columns)
     {
         col.Draw(game->settings.cardStagger, cardSpriteSheet, debugMode);
+    }
+
+    if(game->isDragging)
+    {
+        game->draggedColumn.Draw(game->settings.cardStagger, cardSpriteSheet, debugMode);
     }
 }

@@ -2,6 +2,9 @@
 
 Game::Game(): drawHandler(this)
 {
+    isDragging = false;
+    draggedColumn = Column();
+
     for (int i = 0; i < 7 ; i++)
     {
         Vector2 cardSize = Card::GetDimensions();
@@ -32,9 +35,16 @@ void Game::Reset()
 
 void Game::Update()
 {
+    updateDragging();
+
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
     {
         clickHandler();
+    }
+
+    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+    {
+        stopDragging();
     }
 }
 
