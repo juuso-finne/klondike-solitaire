@@ -100,3 +100,7 @@ Vector2 FixedColumn::FindCardPosition(std::size_t cardIndex)
 {
     return Vector2Add(position, {0, cardIndex * stagger});
 }
+
+void FixedColumn::Restore()
+{
+}

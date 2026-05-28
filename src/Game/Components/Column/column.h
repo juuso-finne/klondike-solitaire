@@ -2,6 +2,7 @@
 #include <vector>
 #include <raylib.h>
 #include "../../../Card/card.h"
+#include "../cardSource.h"
 
 class Game;
 
@@ -23,7 +24,7 @@ class Column
 
 };
 
-class FixedColumn: public Column
+class FixedColumn: Column, CardSource
 {
     friend class Game;
     public:
@@ -31,8 +32,10 @@ class FixedColumn: public Column
 
     protected:
         FixedColumn(Vector2 aPosition, std::vector<Card> aCards);
-        Rectangle GetBoundaries();
         std::size_t FindClickedIndex();
-        std::vector<Card> DetachCards(std::size_t startIndex);
         Vector2 FindCardPosition(std::size_t cardIndex);
+
+        std::vector<Card> DetachCards(std::size_t startIndex = 0);
+        Rectangle GetBoundaries();
+        void Restore();
 };

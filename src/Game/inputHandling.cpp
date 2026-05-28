@@ -7,15 +7,15 @@ void Game::clickHandler()
     {
         if(!c.cards.empty() && CheckCollisionPointRec(GetMousePosition(), c.GetBoundaries()))
         {
-            startDragging(c);
+            std::size_t startIndex = c.FindClickedIndex();
+            draggedColumn.position = c.FindCardPosition(startIndex);
+            startDragging(c, startIndex);
         }
     }
 }
 
-void Game::startDragging(FixedColumn &c)
+void Game::startDragging(FixedColumn &c, std::size_t startIndex)
 {
-    std::size_t startIndex = c.FindClickedIndex();
-    draggedColumn.position = c.FindCardPosition(startIndex);
     std::vector<Card> cardsToDrag = c.DetachCards(startIndex);
 
     if (cardsToDrag.empty()){
