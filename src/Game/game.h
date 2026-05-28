@@ -25,7 +25,9 @@ class Game
         bool isDragging;
         Column draggedColumn;
 
-        void startDragging(FixedColumn &c, std::size_t startIndex = 0);
+        void startDragging(CardSource &c, std::size_t startIndex = 0);
         void stopDragging();
         void updateDragging();
+
+        CardSource *origin;
 };

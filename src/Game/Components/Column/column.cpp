@@ -24,6 +24,7 @@ void Column::Draw(Texture2D &spritesheet, bool debugMode)
     }
 }
 
+
 FixedColumn::FixedColumn(Vector2 aPosition, std::vector<Card> aCards):Column(aPosition, aCards)
 {}
 
@@ -93,6 +94,11 @@ std::vector<Card> FixedColumn::DetachCards(std::size_t startIndex)
         output.push_back(cards[i + 1]);
     }
 
+    for (auto i = cards.begin() + startIndex; i != cards.end();)
+    {
+        i = cards.erase(i);
+    }
+
     return output;
 }
 
@@ -101,6 +107,12 @@ Vector2 FixedColumn::FindCardPosition(std::size_t cardIndex)
     return Vector2Add(position, {0, cardIndex * stagger});
 }
 
-void FixedColumn::Restore()
+void FixedColumn::Restore(std::vector<Card> returnedCards)
 {
+    for (Card c : returnedCards)
+    {
+        cards.push_back(c);
+    }
+
+    returnedCards.clear();
 }

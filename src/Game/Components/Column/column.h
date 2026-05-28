@@ -14,7 +14,6 @@ class Column
 
 
     protected:
-
         static float stagger;
 
         Vector2 position;
@@ -37,5 +36,5 @@ class FixedColumn: Column, CardSource
 
         std::vector<Card> DetachCards(std::size_t startIndex = 0);
         Rectangle GetBoundaries();
-        void Restore();
+        void Restore(std::vector<Card> returnedCards);
 };
