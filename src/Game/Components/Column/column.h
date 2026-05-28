@@ -36,5 +36,8 @@ class FixedColumn: Column, CardSource
 
         std::vector<Card> DetachCards(std::size_t startIndex = 0);
         Rectangle GetBoundaries();
+        Rectangle GetHitbox();
+
+        bool Attach(std::vector<Card> newCards);
         void Restore(std::vector<Card> returnedCards);
 };

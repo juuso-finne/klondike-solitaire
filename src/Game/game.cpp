@@ -35,16 +35,16 @@ void Game::Reset()
 
 void Game::Update()
 {
-    updateDragging();
+    UpdateDragging();
 
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
     {
-        clickHandler();
+        ClickHandler();
     }
 
     if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
     {
-        stopDragging();
+        ReleaseHandler();
     }
 }
 

@@ -41,6 +41,16 @@ Rectangle FixedColumn::GetBoundaries()
     return {position.x, position.y, cardSize.x, height};
 }
 
+Rectangle FixedColumn::GetHitbox()
+{
+    if (cards.empty())
+    {
+        return Card::GetHitBox(position);
+    }
+
+    return Card::GetHitBox(Vector2Add(position, {0, stagger * cards.size() - 1}));
+}
+
 void FixedColumn::Draw(Texture2D &spritesheet, bool debugMode)
 {
     if (cards.empty())
@@ -69,6 +79,23 @@ std::size_t FixedColumn::FindClickedIndex()
     }
 
     return 0;
+}
+
+bool FixedColumn::Attach(std::vector<Card> newCards)
+{
+    bool success = cards.empty() ? newCards.front().GetRank() == 13 : cards.back().CheckAccommodation(newCards.front());
+
+    if(!success)
+    {
+        return false;
+    }
+
+    for (Card c: newCards)
+    {
+        cards.push_back(c);
+    }
+
+    return true;
 }
 
 std::vector<Card> FixedColumn::DetachCards(std::size_t startIndex)

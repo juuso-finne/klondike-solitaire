@@ -14,7 +14,8 @@ class Game
         void Update();
         void Draw(bool debugMode = false);
 
-        void clickHandler();
+        void ClickHandler();
+        void ReleaseHandler();
 
         GameSettings settings;
         DrawHandler drawHandler;
@@ -25,9 +26,9 @@ class Game
         bool isDragging;
         Column draggedColumn;
 
-        void startDragging(CardSource &c, std::size_t startIndex = 0);
-        void stopDragging();
-        void updateDragging();
+        void StartDragging(CardSource &c, std::size_t startIndex = 0);
+        bool Attach(CardSource &src);
+        void UpdateDragging();
 
         CardSource *origin;
 };
