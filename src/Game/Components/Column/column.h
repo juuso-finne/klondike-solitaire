@@ -29,6 +29,7 @@ class FixedColumn: public Column
     protected:
         FixedColumn(Vector2 aPosition, std::vector<Card> aCards);
         Rectangle GetBoundaries(float stagger);
-        int FindClickedIndex(float stagger);
-        std::vector<Card> DetatchToDrag(float stagger);
+        std::size_t FindClickedIndex(float stagger);
+        std::vector<Card> DetachCards(float stagger, std::size_t startIndex);
+        Vector2 FindCardPosition(float stagger, std::size_t cardIndex);
 };

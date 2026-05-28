@@ -55,9 +55,9 @@ void FixedColumn::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
     }
 }
 
-int FixedColumn::FindClickedIndex(float stagger)
+std::size_t FixedColumn::FindClickedIndex(float stagger)
 {
-    for(int i = cards.size() - 1; i >= 0; i--)
+    for(std::size_t i = cards.size() - 1; i >= 0; i--)
     {
         if (GetMousePosition().y > position.y + i * stagger)
         {
@@ -68,10 +68,8 @@ int FixedColumn::FindClickedIndex(float stagger)
     return 0;
 }
 
-std::vector<Card> FixedColumn::DetatchToDrag(float stagger)
+std::vector<Card> FixedColumn::DetachCards(float stagger, std::size_t startIndex)
 {
-    int startIndex = FindClickedIndex(stagger);
-
     if (!cards[startIndex].isFaceUp)
     {
         if (startIndex == cards.size() - 1)
@@ -94,4 +92,9 @@ std::vector<Card> FixedColumn::DetatchToDrag(float stagger)
     }
 
     return output;
+}
+
+Vector2 FixedColumn::FindCardPosition(float stagger, std::size_t cardIndex)
+{
+    return Vector2Add(position, {0, cardIndex * stagger});
 }
