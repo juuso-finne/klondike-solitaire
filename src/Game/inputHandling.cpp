@@ -3,7 +3,7 @@
 
 void Game::clickHandler()
 {
-    for (FixedColumn c: columns)
+    for (FixedColumn &c: columns)
     {
         if(CheckCollisionPointRec(GetMousePosition(), c.GetBoundaries(settings.cardStagger)))
         {
@@ -12,10 +12,16 @@ void Game::clickHandler()
     }
 }
 
-void Game::startDragging(FixedColumn c)
+void Game::startDragging(FixedColumn &c)
 {
+    std::vector<Card> cardsToDrag = c.DetatchToDrag(settings.cardStagger);
+    if (cardsToDrag.empty()){
+        return;
+    }
+
     isDragging = true;
-    draggedColumn = c;
+    draggedColumn.position = Vector2Add(c.position, {0, ((float)c.cards.size() - cardsToDrag.size()) * settings.cardStagger});
+    draggedColumn.cards = cardsToDrag;
 }
 
 void Game::stopDragging()

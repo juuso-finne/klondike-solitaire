@@ -25,7 +25,7 @@ class Game
         bool isDragging;
         Column draggedColumn;
 
-        void startDragging(FixedColumn c);
+        void startDragging(FixedColumn &c);
         void stopDragging();
         void updateDragging();
 };

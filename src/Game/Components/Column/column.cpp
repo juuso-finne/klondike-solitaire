@@ -67,3 +67,31 @@ int FixedColumn::FindClickedIndex(float stagger)
 
     return 0;
 }
+
+std::vector<Card> FixedColumn::DetatchToDrag(float stagger)
+{
+    int startIndex = FindClickedIndex(stagger);
+
+    if (!cards[startIndex].isFaceUp)
+    {
+        if (startIndex == cards.size() - 1)
+        {
+            cards[startIndex].TurnFaceUp();
+        }
+        return {};
+    }
+
+    std::vector<Card> output = {cards[startIndex]};
+
+    for (std::size_t i = startIndex; i < cards.size() - 1; i++)
+    {
+        if(!cards[i].CheckAccommodation(cards[i + 1]))
+        {
+            return {};
+        }
+
+        output.push_back(cards[i + 1]);
+    }
+
+    return output;
+}

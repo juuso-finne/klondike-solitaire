@@ -78,7 +78,7 @@ Rectangle Card::GetHitBox(Vector2 position)
     return {x, y, width / 2.0F, height / 2.0f};
 }
 
-// Whether or not other card can be placed on top of this card
+/**  Whether or not other card can be placed on top of this card */
 bool Card::CheckAccommodation(const Card &other)
 {
     bool isOtherBlack = other.suit == Suit::CLUBS || other.suit == Suit::SPADES;
