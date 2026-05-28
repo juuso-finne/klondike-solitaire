@@ -54,3 +54,16 @@ void FixedColumn::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
         DrawRectangleLinesEx(GetBoundaries(stagger), 1.0f, RED);
     }
 }
+
+int FixedColumn::FindClickedIndex(float stagger)
+{
+    for(int i = cards.size() - 1; i >= 0; i--)
+    {
+        if (GetMousePosition().y > position.y + i * stagger)
+        {
+            return i;
+        }
+    }
+
+    return 0;
+}

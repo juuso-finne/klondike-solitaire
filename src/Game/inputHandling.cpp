@@ -12,7 +12,7 @@ void Game::clickHandler()
     }
 }
 
-void Game::startDragging(Column c)
+void Game::startDragging(FixedColumn c)
 {
     isDragging = true;
     draggedColumn = c;

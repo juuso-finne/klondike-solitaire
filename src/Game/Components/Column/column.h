@@ -29,4 +29,5 @@ class FixedColumn: public Column
     protected:
         FixedColumn(Vector2 aPosition, std::vector<Card> aCards);
         Rectangle GetBoundaries(float stagger);
+        int FindClickedIndex(float stagger);
 };
