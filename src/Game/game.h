@@ -3,7 +3,7 @@
 #include "GameSettings/gameSettings.h"
 #include "Components/Column/column.h"
 #include "DrawHandler/drawHandler.h"
-#include "../Card/deck.h"
+#include "Components/Deck/deck.h"
 #include "Components/Waste/waste.h"
 
 class Game

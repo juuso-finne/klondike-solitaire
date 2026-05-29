@@ -1,6 +1,4 @@
 #include <raylib.h>
-#include "Card/deck.h"
-#include "Game/Components/Column/column.h"
 #include "Game/game.h"
 
 int main()
