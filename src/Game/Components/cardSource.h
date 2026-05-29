@@ -1,5 +1,8 @@
 #pragma once
 #include <raylib.h>
+#include <vector>
+
+class Card;
 
 class CardSource
 {
@@ -9,4 +12,4 @@ class CardSource
         virtual std::vector<Card> DetachCards(std::size_t startIndex = 0) = 0;
         virtual Rectangle GetHitbox() = 0;
         virtual bool Attach(std::vector<Card> newCards) = 0;
-    };
+};

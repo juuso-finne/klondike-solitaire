@@ -4,6 +4,10 @@ struct GameSettings
 {
     GameSettings();
 
-    float cardStagger;
     float margin;
+
+    int cardsToDeal;
+    int deckPassLimit;
+
+    bool deckPassLimited;
 };

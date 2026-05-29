@@ -3,6 +3,12 @@
 
 void Game::ClickHandler()
 {
+    if(CheckCollisionPointRec(GetMousePosition(), waste.GetBoundaries()))
+    {
+        draggedColumn.position = waste.position;
+        StartDragging(waste);
+    }
+
     for (FixedColumn &c: columns)
     {
         if(!c.cards.empty() && CheckCollisionPointRec(GetMousePosition(), c.GetBoundaries()))

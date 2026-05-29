@@ -4,6 +4,7 @@
 #include "Components/Column/column.h"
 #include "DrawHandler/drawHandler.h"
 #include "../Card/deck.h"
+#include "Components/Waste/waste.h"
 
 class Game
 {
@@ -22,6 +23,7 @@ class Game
 
         Deck deck;
         std::vector<FixedColumn> columns;
+        Waste waste;
 
         bool isDragging;
         Column draggedColumn;
