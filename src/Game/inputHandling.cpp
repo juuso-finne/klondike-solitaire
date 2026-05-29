@@ -3,6 +3,12 @@
 
 void Game::ClickHandler()
 {
+
+    if(CheckCollisionPointRec(GetMousePosition(), deck.GetBoundaries()))
+    {
+        waste.Deal();
+    }
+
     if(CheckCollisionPointRec(GetMousePosition(), waste.GetBoundaries()))
     {
         draggedColumn.position = waste.position;

@@ -18,6 +18,7 @@ void DrawHandler::Draw(bool debugMode)
 void DrawHandler::DrawGame(bool debugMode)
 {
     game -> waste.Draw(cardSpriteSheet, debugMode);
+    game -> deck.Draw(cardSpriteSheet, debugMode);
 
     for (FixedColumn col : game->columns)
     {

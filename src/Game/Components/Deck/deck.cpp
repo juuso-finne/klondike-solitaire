@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "deck.h"
 
-Deck::Deck()
+Deck::Deck(Vector2 aPosition): position(aPosition)
 {
     cards = std::vector<Card>{};
     Reset();
@@ -52,15 +52,6 @@ Card Deck::DealOne()
     return output;
 }
 
-void Deck::Append(const std::vector<Card> &newCards)
-{
-    for (Card c: newCards)
-    {
-        c.TurnFaceDown();
-        cards.insert(cards.begin(), c);
-    }
-}
-
 std::vector<Card> Deck::DealN(int n)
 {
     std::vector<Card> output{};
@@ -72,4 +63,31 @@ std::vector<Card> Deck::DealN(int n)
         }
     }
     return output;
+}
+
+Rectangle Deck::GetBoundaries()
+{
+    Vector2 cardSize = Card::GetDimensions();
+    return {position.x, position.y, cardSize.x, cardSize.y};
+}
+
+void Deck::Append(const std::vector<Card> &newCards)
+{
+    for (Card c: newCards)
+    {
+        c.TurnFaceDown();
+        cards.insert(cards.begin(), c);
+    }
+}
+
+void Deck::Draw(Texture2D &spritesheet, bool debugMode)
+{
+    if (cards.empty())
+    {
+        Vector2 cardSize = Card::GetDimensions();
+        DrawRectangleRoundedLines({position.x, position.y, cardSize.x, cardSize.y}, 0.2f, 2, WHITE);
+    } else
+    {
+        cards[0].Draw(position, spritesheet, debugMode);
+    }
 }

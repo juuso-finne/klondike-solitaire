@@ -1,6 +1,6 @@
 #include "game.h"
 
-Game::Game(): drawHandler(this), waste(this)
+Game::Game(): drawHandler(this), waste(this), deck (Deck({settings.margin, settings.margin}))
 {
     isDragging = false;
     draggedColumn = Column();
@@ -20,7 +20,8 @@ Game::Game(): drawHandler(this), waste(this)
 
 void Game::Reset()
 {
-    deck = Deck();
+    deck.Reset();
+    origin = nullptr;
 
     for (std::size_t i = 0; i < columns.size(); i++){
         FixedColumn *c = &columns[i];
@@ -36,11 +37,6 @@ void Game::Reset()
 void Game::Update()
 {
     UpdateDragging();
-
-    if(IsKeyPressed(KEY_SPACE))
-    {
-        waste.Deal();
-    }
 
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
     {

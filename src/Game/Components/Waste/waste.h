@@ -6,8 +6,9 @@
 
 class Game;
 
-class Waste: public CardSource
+class Waste: CardSource
 {
+    friend class Game;
     public:
         Waste(Game *aGame);
 

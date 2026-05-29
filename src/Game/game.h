@@ -21,9 +21,9 @@ class Game
         GameSettings settings;
         DrawHandler drawHandler;
 
-        Deck deck;
         std::vector<FixedColumn> columns;
         Waste waste;
+        Deck deck;
 
         bool isDragging;
         Column draggedColumn;
