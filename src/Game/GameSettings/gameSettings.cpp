@@ -2,6 +2,10 @@
 
 GameSettings::GameSettings()
 {
-    cardStagger = 25.0f;
     margin = 20.0f;
+
+    cardsToDeal = 3;
+    deckPassLimit = 3;
+
+    deckPassLimited = true;
 }

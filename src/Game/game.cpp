@@ -1,7 +1,10 @@
 #include "game.h"
 
-Game::Game(): drawHandler(this)
+Game::Game(): drawHandler(this), waste(this)
 {
+    isDragging = false;
+    draggedColumn = Column();
+
     for (int i = 0; i < 7 ; i++)
     {
         Vector2 cardSize = Card::GetDimensions();
@@ -32,9 +35,21 @@ void Game::Reset()
 
 void Game::Update()
 {
+    UpdateDragging();
+
+    if(IsKeyPressed(KEY_SPACE))
+    {
+        waste.Deal();
+    }
+
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
     {
-        clickHandler();
+        ClickHandler();
+    }
+
+    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+    {
+        ReleaseHandler();
     }
 }
 

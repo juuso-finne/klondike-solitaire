@@ -1,13 +1,21 @@
 #include "column.h"
 #include <raymath.h>
 
+float Column::stagger = 25.0f;
+
+Column::Column()
+{
+    cards = {};
+    position = {0,0};
+}
+
 Column::Column(Vector2 aPosition, std::vector<Card> aCards)
 {
     cards = aCards;
     position = aPosition;
 }
 
-void Column::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
+void Column::Draw(Texture2D &spritesheet, bool debugMode)
 {
     for (std::size_t i = 0; i < cards.size(); i++)
     {
@@ -16,10 +24,11 @@ void Column::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
     }
 }
 
+
 FixedColumn::FixedColumn(Vector2 aPosition, std::vector<Card> aCards):Column(aPosition, aCards)
 {}
 
-Rectangle FixedColumn::GetBoundaries(float stagger)
+Rectangle FixedColumn::GetBoundaries()
 {
     if (cards.empty()){
         return {0,0,0,0};
@@ -32,7 +41,17 @@ Rectangle FixedColumn::GetBoundaries(float stagger)
     return {position.x, position.y, cardSize.x, height};
 }
 
-void FixedColumn::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
+Rectangle FixedColumn::GetHitbox()
+{
+    if (cards.empty())
+    {
+        return Card::GetHitBox(position);
+    }
+
+    return Card::GetHitBox(Vector2Add(position, {0, stagger * cards.size() - 1}));
+}
+
+void FixedColumn::Draw(Texture2D &spritesheet, bool debugMode)
 {
     if (cards.empty())
     {
@@ -40,11 +59,87 @@ void FixedColumn::Draw(float stagger, Texture2D &spritesheet, bool debugMode)
         DrawRectangleRoundedLines({position.x, position.y, cardSize.x, cardSize.y}, 0.2f, 2, WHITE);
     } else
     {
-        Column::Draw(stagger, spritesheet, debugMode);
+        Column::Draw(spritesheet, debugMode);
     }
 
     if(debugMode)
     {
-        DrawRectangleLinesEx(GetBoundaries(stagger), 1.0f, RED);
+        DrawRectangleLinesEx(GetBoundaries(), 1.0f, RED);
     }
+}
+
+std::size_t FixedColumn::FindClickedIndex()
+{
+    for(std::size_t i = cards.size() - 1; i >= 0; i--)
+    {
+        if (GetMousePosition().y > position.y + i * stagger)
+        {
+            return i;
+        }
+    }
+
+    return 0;
+}
+
+bool FixedColumn::Attach(std::vector<Card> newCards)
+{
+    bool success = cards.empty() ? newCards.front().GetRank() == 13 : cards.back().CheckAccommodation(newCards.front());
+
+    if(!success)
+    {
+        return false;
+    }
+
+    for (Card c: newCards)
+    {
+        cards.push_back(c);
+    }
+
+    return true;
+}
+
+std::vector<Card> FixedColumn::DetachCards(std::size_t startIndex)
+{
+    if (!cards[startIndex].isFaceUp)
+    {
+        if (startIndex == cards.size() - 1)
+        {
+            cards[startIndex].TurnFaceUp();
+        }
+        return {};
+    }
+
+    std::vector<Card> output = {cards[startIndex]};
+
+    for (std::size_t i = startIndex; i < cards.size() - 1; i++)
+    {
+        if(!cards[i].CheckAccommodation(cards[i + 1]))
+        {
+            return {};
+        }
+
+        output.push_back(cards[i + 1]);
+    }
+
+    for (auto i = cards.begin() + startIndex; i != cards.end();)
+    {
+        i = cards.erase(i);
+    }
+
+    return output;
+}
+
+Vector2 FixedColumn::FindCardPosition(std::size_t cardIndex)
+{
+    return Vector2Add(position, {0, cardIndex * stagger});
+}
+
+void FixedColumn::Restore(std::vector<Card> returnedCards)
+{
+    for (Card c : returnedCards)
+    {
+        cards.push_back(c);
+    }
+
+    returnedCards.clear();
 }

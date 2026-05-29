@@ -2,13 +2,13 @@
 #include <stdexcept>
 #include <raymath.h>
 
-    float Card::spriteWidth = 75.0f;
-    float Card::spriteHeight = 112.0f;
+float Card::spriteWidth = 75.0f;
+float Card::spriteHeight = 112.0f;
 
-    const float scaling = 1.5f;
+const float scaling = 1.5f;
 
-    float Card::width = spriteWidth * scaling;
-    float Card::height = spriteHeight * scaling;
+float Card::width = spriteWidth * scaling;
+float Card::height = spriteHeight * scaling;
 
 Card::Card(int aRank, Suit aSuit, bool isVisible)
 {
@@ -78,7 +78,7 @@ Rectangle Card::GetHitBox(Vector2 position)
     return {x, y, width / 2.0F, height / 2.0f};
 }
 
-// Whether or not other card can be placed on top of this card
+/**  Whether or not other card can be placed on top of this card */
 bool Card::CheckAccommodation(const Card &other)
 {
     bool isOtherBlack = other.suit == Suit::CLUBS || other.suit == Suit::SPADES;

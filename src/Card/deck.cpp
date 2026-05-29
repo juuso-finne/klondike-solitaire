@@ -57,7 +57,7 @@ void Deck::Append(const std::vector<Card> &newCards)
     for (Card c: newCards)
     {
         c.TurnFaceDown();
-        cards.insert(cards.end(), c);
+        cards.insert(cards.begin(), c);
     }
 }
 

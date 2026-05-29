@@ -9,13 +9,23 @@ DrawHandler::DrawHandler(Game *aGame)
 
 void DrawHandler::Draw(bool debugMode)
 {
+    BeginDrawing();
+    ClearBackground(BLACK);
     DrawGame(debugMode);
+    EndDrawing();
 }
 
 void DrawHandler::DrawGame(bool debugMode)
 {
+    game -> waste.Draw(cardSpriteSheet, debugMode);
+
     for (FixedColumn col : game->columns)
     {
-        col.Draw(game->settings.cardStagger, cardSpriteSheet, debugMode);
+        col.Draw(cardSpriteSheet, debugMode);
+    }
+
+    if(game->isDragging)
+    {
+        game->draggedColumn.Draw(cardSpriteSheet, debugMode);
     }
 }
