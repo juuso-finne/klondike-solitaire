@@ -5,6 +5,7 @@
 #include "DrawHandler/drawHandler.h"
 #include "Components/Deck/deck.h"
 #include "Components/Waste/waste.h"
+#include "Components/Foundation/foundation.h"
 
 class Game
 {
@@ -22,6 +23,7 @@ class Game
         DrawHandler drawHandler;
 
         std::vector<FixedColumn> columns;
+        std::vector<Foundation> foundations;
         Waste waste;
         Deck deck;
 

@@ -15,6 +15,17 @@ Game::Game(): drawHandler(this), waste(this), deck (Deck({settings.margin, setti
         columns.push_back(c);
     }
 
+    for (int i = 0; i < 4; i++)
+    {
+        Vector2 cardSize = Card::GetDimensions();
+
+        float x = GetScreenWidth() - (settings.margin + cardSize.x) * (4 - i);
+        float y = settings.margin;
+
+        Foundation f = Foundation({x, y}, this);
+        foundations.push_back(f);
+    }
+
     Reset();
 }
 
@@ -32,6 +43,11 @@ void Game::Reset()
         {
             c -> cards.back().TurnFaceUp();
         }
+    }
+
+    for (Foundation &f : foundations)
+    {
+        f.cards.clear();
     }
 }
 

@@ -37,7 +37,16 @@ void Game::ReleaseHandler()
 
     for (FixedColumn &c: columns)
     {
-        successfulAttach = Attach(c);
+        successfulAttach = successfulAttach || Attach(c);
+        if (successfulAttach)
+        {
+            break;
+        }
+    }
+
+     for (Foundation &f: foundations)
+    {
+        successfulAttach = successfulAttach || Attach(f);
         if (successfulAttach)
         {
             break;
