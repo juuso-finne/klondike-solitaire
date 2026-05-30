@@ -22,6 +22,7 @@ void Game::Reset()
 {
     deck.Reset();
     origin = nullptr;
+    deckCyclesUsed = 0;
 
     for (std::size_t i = 0; i < columns.size(); i++){
         FixedColumn *c = &columns[i];
@@ -52,4 +53,9 @@ void Game::Update()
 void Game::Draw(bool debugMode)
 {
     drawHandler.Draw(debugMode);
+}
+
+bool Game::CyclesLeft()
+{
+    return !settings.deckCyclingLimited || deckCyclesUsed < settings.deckCycleLimit;
 }

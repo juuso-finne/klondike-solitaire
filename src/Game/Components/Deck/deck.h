@@ -13,10 +13,11 @@ class Deck{
         std::vector<Card> DealN(int n);
         Rectangle GetBoundaries();
         void Append(const std::vector<Card> &newCards);
-        void Draw(Texture2D &spritesheet, bool debugMode = false);
+        void Draw(Texture2D &spritesheet, bool cyclesLeft, bool debugMode = false);
 
     private:
         std::vector<Card> cards;
         Vector2 position;
         void Generate();
+        void DrawCross(Vector2 center, float size, float thickness = 5.0f);
 };

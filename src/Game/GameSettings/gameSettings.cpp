@@ -4,8 +4,8 @@ GameSettings::GameSettings()
 {
     margin = 20.0f;
 
-    cardsToDeal = 3;
-    deckPassLimit = 3;
+    cardsToDeal = 1;
+    deckCycleLimit = 3;
 
-    deckPassLimited = true;
+    deckCyclingLimited = false;
 }

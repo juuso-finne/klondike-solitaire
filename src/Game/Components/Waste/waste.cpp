@@ -20,6 +20,11 @@ void Waste::Draw(Texture2D &spritesheet, bool debugMode)
 
 void Waste::Deal()
 {
+    if(!game -> CyclesLeft())
+    {
+        return;
+    }
+
     if (game -> deck.IsEmpty())
     {
         game -> deck.Append(cards);
@@ -29,13 +34,15 @@ void Waste::Deal()
 
     for (int i = 0; i < game->settings.cardsToDeal; i++)
     {
-        if (game -> deck.IsEmpty())
-        {
-            return;
-        }
         Card c = game -> deck.DealOne();
         c.TurnFaceUp();
         cards.push_back(c);
+
+        if (game -> deck.IsEmpty())
+        {
+            game -> deckCyclesUsed++;
+            return;
+        }
     }
 }
 

@@ -25,8 +25,11 @@ class Game
         Waste waste;
         Deck deck;
 
+        int deckCyclesUsed;
         bool isDragging;
         Column draggedColumn;
+
+        bool CyclesLeft();
 
         void StartDragging(CardSource &c, std::size_t startIndex = 0);
         bool Attach(CardSource &src);

@@ -2,6 +2,7 @@
 #include <random>
 #include <stdexcept>
 #include "deck.h"
+#include <raymath.h>
 
 Deck::Deck(Vector2 aPosition): position(aPosition)
 {
@@ -80,14 +81,39 @@ void Deck::Append(const std::vector<Card> &newCards)
     }
 }
 
-void Deck::Draw(Texture2D &spritesheet, bool debugMode)
+void Deck::Draw(Texture2D &spritesheet, bool cyclesLeft, bool debugMode)
 {
+    Vector2 cardSize = Card::GetDimensions();
+    Vector2 center = Vector2Add(position, Vector2Scale(cardSize, 0.5f));
+
     if (cards.empty())
     {
         Vector2 cardSize = Card::GetDimensions();
         DrawRectangleRoundedLines({position.x, position.y, cardSize.x, cardSize.y}, 0.2f, 2, WHITE);
+
+        if(cyclesLeft)
+        {
+            DrawRing(center, 31.0f, 36.0f, 0, 360, 100, GREEN);
+        } else
+        {
+            DrawCross(center, 50.0f, 5.0f);
+        }
+
+
     } else
     {
         cards[0].Draw(position, spritesheet, debugMode);
     }
 }
+
+void Deck::DrawCross(Vector2 center, float size, float thickness)
+{
+    Vector2 upperLeft = Vector2AddValue(center, -size / 2);
+    Vector2 lowerRight = Vector2AddValue(center, size / 2);
+    Vector2 lowerLeft = Vector2Add(upperLeft, {0, size});
+    Vector2 upperRight = Vector2Add(lowerRight, {0, -size});
+
+    DrawLineEx(upperLeft, lowerRight, thickness, RED);
+    DrawLineEx(lowerLeft, upperRight, thickness, RED);
+}
+
