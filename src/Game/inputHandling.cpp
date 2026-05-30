@@ -3,6 +3,12 @@
 
 void Game::ClickHandler()
 {
+
+    if(CheckCollisionPointRec(GetMousePosition(), deck.GetBoundaries()))
+    {
+        waste.Deal();
+    }
+
     if(CheckCollisionPointRec(GetMousePosition(), waste.GetBoundaries()))
     {
         draggedColumn.position = waste.position;
@@ -31,7 +37,16 @@ void Game::ReleaseHandler()
 
     for (FixedColumn &c: columns)
     {
-        successfulAttach = Attach(c);
+        successfulAttach = successfulAttach || Attach(c);
+        if (successfulAttach)
+        {
+            break;
+        }
+    }
+
+     for (Foundation &f: foundations)
+    {
+        successfulAttach = successfulAttach || Attach(f);
         if (successfulAttach)
         {
             break;
@@ -60,7 +75,7 @@ void Game::StartDragging(CardSource &src, std::size_t startIndex)
     draggedColumn.cards = cardsToDrag;
 }
 
-bool Game::Attach(CardSource &dest)
+bool Game::Attach(CardDestination &dest)
 {
     Rectangle hitbox = Card::GetHitBox(draggedColumn.position);
 

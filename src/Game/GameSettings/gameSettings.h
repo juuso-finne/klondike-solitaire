@@ -7,7 +7,7 @@ struct GameSettings
     float margin;
 
     int cardsToDeal;
-    int deckPassLimit;
+    int deckCycleLimit;
 
-    bool deckPassLimited;
+    bool deckCyclingLimited;
 };

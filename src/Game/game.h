@@ -3,8 +3,9 @@
 #include "GameSettings/gameSettings.h"
 #include "Components/Column/column.h"
 #include "DrawHandler/drawHandler.h"
-#include "../Card/deck.h"
+#include "Components/Deck/deck.h"
 #include "Components/Waste/waste.h"
+#include "Components/Foundation/foundation.h"
 
 class Game
 {
@@ -21,15 +22,19 @@ class Game
         GameSettings settings;
         DrawHandler drawHandler;
 
-        Deck deck;
         std::vector<FixedColumn> columns;
+        std::vector<Foundation> foundations;
         Waste waste;
+        Deck deck;
 
+        int deckCyclesUsed;
         bool isDragging;
         Column draggedColumn;
 
+        bool CyclesLeft();
+
         void StartDragging(CardSource &c, std::size_t startIndex = 0);
-        bool Attach(CardSource &src);
+        bool Attach(CardDestination &src);
         void UpdateDragging();
 
         CardSource *origin;
