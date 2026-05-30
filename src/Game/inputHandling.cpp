@@ -66,7 +66,7 @@ void Game::StartDragging(CardSource &src, std::size_t startIndex)
     draggedColumn.cards = cardsToDrag;
 }
 
-bool Game::Attach(CardSource &dest)
+bool Game::Attach(CardDestination &dest)
 {
     Rectangle hitbox = Card::GetHitBox(draggedColumn.position);
 

@@ -69,13 +69,3 @@ std::vector<Card> Waste::DetachCards(std::size_t startIndex)
 
     return output;
 }
-
-Rectangle Waste::GetHitbox()
-{
-    return Rectangle();
-}
-
-bool Waste::Attach(std::vector<Card> newCards)
-{
-    return false;
-}

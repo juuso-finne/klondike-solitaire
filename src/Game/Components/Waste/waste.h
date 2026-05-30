@@ -1,5 +1,5 @@
 #pragma once
-#include "../cardSource.h"
+#include "../interfaces.h"
 #include <vector>
 #include "../../../Card/card.h"
 #include <raylib.h>
@@ -22,6 +22,4 @@ class Waste: CardSource
         Rectangle GetBoundaries();
         void Restore(std::vector<Card> returnedCards);
         std::vector<Card> DetachCards(std::size_t startIndex = 0);
-        Rectangle GetHitbox();
-        bool Attach(std::vector<Card> newCards);
 };

@@ -2,7 +2,7 @@
 #include <vector>
 #include <raylib.h>
 #include "../../../Card/card.h"
-#include "../cardSource.h"
+#include "../interfaces.h"
 
 class Game;
 
@@ -23,7 +23,7 @@ class Column
 
 };
 
-class FixedColumn: Column, CardSource
+class FixedColumn: Column, CardSource, CardDestination
 {
     friend class Game;
     public:

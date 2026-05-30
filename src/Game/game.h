@@ -32,7 +32,7 @@ class Game
         bool CyclesLeft();
 
         void StartDragging(CardSource &c, std::size_t startIndex = 0);
-        bool Attach(CardSource &src);
+        bool Attach(CardDestination &src);
         void UpdateDragging();
 
         CardSource *origin;
