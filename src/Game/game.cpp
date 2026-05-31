@@ -1,8 +1,10 @@
 #include "game.h"
+#include <raymath.h>
 
 Game::Game(): drawHandler(this), waste(this), deck (Deck({settings.margin, settings.margin}))
 {
     isDragging = false;
+    doubleClickTimer = 0.0f;
     draggedColumn = Column();
 
     for (int i = 0; i < 7 ; i++)
@@ -54,6 +56,8 @@ void Game::Reset()
 void Game::Update()
 {
     UpdateDragging();
+    doubleClickTimer -= GetFrameTime();
+    doubleClickTimer = Clamp(doubleClickTimer, 0.0f, settings.doubleClickThreshold);
 
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
     {

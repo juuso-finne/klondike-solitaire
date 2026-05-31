@@ -4,6 +4,8 @@ struct GameSettings
 {
     GameSettings();
 
+    float doubleClickThreshold;
+
     float margin;
 
     int cardsToDeal;

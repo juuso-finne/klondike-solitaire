@@ -17,6 +17,7 @@ class Game
         void Draw(bool debugMode = false);
 
         void ClickHandler();
+        void DoubleClickHandler();
         void ReleaseHandler();
 
         GameSettings settings;
@@ -26,6 +27,8 @@ class Game
         std::vector<Foundation> foundations;
         Waste waste;
         Deck deck;
+
+        float doubleClickTimer;
 
         int deckCyclesUsed;
         bool isDragging;
