@@ -4,7 +4,7 @@
 
 class Game;
 
-class Foundation: CardDestination
+class Foundation: CardDestination, CardSource
 {
     friend class Game;
 
@@ -20,6 +20,10 @@ class Foundation: CardDestination
 
         Rectangle GetHitbox();
         bool Attach(std::vector<Card> newCards);
+
+        Rectangle GetBoundaries();
+        void Restore(std::vector<Card> returnedCards);
+        std::vector<Card> DetachCards(std::size_t startIndex = 0);
 
         Vector2 position;
 };

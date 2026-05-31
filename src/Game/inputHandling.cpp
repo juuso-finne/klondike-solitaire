@@ -25,6 +25,15 @@ void Game::ClickHandler()
             return;
         }
     }
+
+    for (Foundation &f: foundations)
+    {
+        if(!f.cards.empty() && CheckCollisionPointRec(GetMousePosition(), f.GetBoundaries()))
+        {
+            draggedColumn.position = f.position;
+            StartDragging(f);
+        }
+    }
 }
 
 void Game::ReleaseHandler()
