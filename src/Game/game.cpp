@@ -6,6 +6,7 @@ Game::Game(): drawHandler(this), waste(this), deck (Deck({settings.margin, setti
     isDragging = false;
     doubleClickTimer = 0.0f;
     draggedColumn = Column();
+    state = GameState::MAIN_MENU;
 
     for (int i = 0; i < 7 ; i++)
     {
