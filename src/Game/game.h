@@ -7,13 +7,6 @@
 #include "Components/Waste/waste.h"
 #include "Components/Foundation/foundation.h"
 
-enum class GameState
-{
-    MAIN_MENU,
-    OPTIONS_MENU,
-    GAME
-};
-
 class Game
 {
     public:

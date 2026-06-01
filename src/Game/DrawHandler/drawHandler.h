@@ -1,6 +1,13 @@
 #pragma once
 #include <raylib.h>
 
+enum GameState
+{
+    MAIN_MENU,
+    OPTIONS_MENU,
+    GAME
+};
+
 class Game;
 
 class DrawHandler
@@ -13,4 +20,7 @@ class DrawHandler
         void Draw(bool debugMode = false);
 
         void DrawGame(bool debugMode = false);
+        void DrawMainMenu();
+
+        void GameStateButton(float y, const char *text, Game *game, GameState newState);
 };

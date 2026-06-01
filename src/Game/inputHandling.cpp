@@ -3,6 +3,11 @@
 
 void Game::ClickHandler()
 {
+    if (state != GAME)
+    {
+        return;
+    }
+
     if(CheckCollisionPointRec(GetMousePosition(), deck.GetBoundaries()))
     {
         waste.Deal();
