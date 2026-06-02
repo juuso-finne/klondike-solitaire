@@ -11,5 +11,5 @@ struct GameSettings
     int cardsToDeal;
     int deckCycleLimit;
 
-    bool deckCyclingLimited;
+    bool deckCyclingUnlimited;
 };

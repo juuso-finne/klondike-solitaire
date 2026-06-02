@@ -10,5 +10,5 @@ GameSettings::GameSettings()
     cardsToDeal = 1;
     deckCycleLimit = 3;
 
-    deckCyclingLimited = false;
+    deckCyclingUnlimited = false;
 }

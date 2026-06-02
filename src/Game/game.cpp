@@ -78,5 +78,5 @@ void Game::Draw(bool debugMode)
 
 bool Game::CyclesLeft()
 {
-    return !settings.deckCyclingLimited || deckCyclesUsed < settings.deckCycleLimit;
+    return settings.deckCyclingUnlimited || deckCyclesUsed < settings.deckCycleLimit;
 }
