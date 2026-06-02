@@ -1,13 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include <map>
-
-enum GameState
-{
-    MAIN_MENU,
-    OPTIONS_MENU,
-    GAME
-};
+#include "../gamestate.h"
 
 enum DropdownMenu
 {
