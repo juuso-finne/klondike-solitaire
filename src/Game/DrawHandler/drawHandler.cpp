@@ -29,8 +29,12 @@ void DrawHandler::Draw(bool debugMode)
             DrawGame(debugMode);
             break;
 
+        case PAUSE:
+            DrawPauseMenu();
+            break;
+
         default:
-            return;
+            break;;
     }
     EndDrawing();
 }
@@ -58,8 +62,9 @@ void DrawHandler::DrawGame(bool debugMode)
 
 void DrawHandler::DrawMainMenu()
 {
-    GameStateButton(300.0f, 0, "Start game", game, GAME);
-    GameStateButton(300.0f, 1, "Options", game, OPTIONS_MENU);
+    GameStateButton(300.0f, 0, "Start game", RESET);
+    GameStateButton(300.0f, 1, "Options", OPTIONS_MENU);
+    GameStateButton(300.0f, 2, "Exit", HALT);
 }
 
 void DrawHandler::DrawOptionsMenu()
@@ -97,10 +102,19 @@ void DrawHandler::DrawOptionsMenu()
     }
     game -> settings.cardsToDeal = cardsDealtIndex == 0 ? 1 : 3;
 
-    GameStateButton(baseY + rowSpacing * 7, 0, "Back", game, MAIN_MENU);
+    GameStateButton(baseY + rowSpacing * 7, 0, "Back", MAIN_MENU);
 }
 
-void DrawHandler::GameStateButton(float baseY, int row, const char *text, Game *game, GameState newState)
+void DrawHandler::DrawPauseMenu()
+{
+    GameStateButton(300.0f, 0, "Continue", GAME);
+    GameStateButton(300.0f, 2, "New game", RESET);
+    GameStateButton(300.0f, 3, "Exit to menu", MAIN_MENU);
+    GameStateButton(300.0f, 4, "Exit", HALT);
+}
+
+
+void DrawHandler::GameStateButton(float baseY, int row, const char *text, GameState newState)
 {
     Vector2 size = {200, 50};
     float rowSpacing = 20.0f;

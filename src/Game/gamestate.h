@@ -5,5 +5,6 @@ enum GameState
     OPTIONS_MENU,
     GAME,
     PAUSE,
-    HALT
+    HALT,
+    RESET
 };

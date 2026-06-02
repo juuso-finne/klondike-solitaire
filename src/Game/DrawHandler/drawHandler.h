@@ -25,6 +25,7 @@ class DrawHandler
         void DrawGame(bool debugMode = false);
         void DrawMainMenu();
         void DrawOptionsMenu();
+        void DrawPauseMenu();
 
-        void GameStateButton(float baseY, int row, const char *text, Game *game, GameState newState);
+        void GameStateButton(float baseY, int row, const char *text, GameState newState);
 };

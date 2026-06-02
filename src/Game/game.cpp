@@ -56,6 +56,33 @@ void Game::Reset()
 
 void Game::Update()
 {
+    switch (state)
+    {
+    case GAME:
+        break;
+
+    case HALT:
+        CloseWindow();
+        exit(0);
+        return;
+
+    case RESET:
+        Reset();
+        state = GAME;
+        return;
+
+    case PAUSE:
+        state = IsKeyPressed(KEY_ESCAPE) ? GAME : PAUSE;
+        return;
+
+    case OPTIONS_MENU:
+        state = IsKeyPressed(KEY_ESCAPE) ? MAIN_MENU : OPTIONS_MENU;
+        return;
+
+    default:
+        return;
+    }
+
     UpdateDragging();
     doubleClickTimer -= GetFrameTime();
     doubleClickTimer = Clamp(doubleClickTimer, 0.0f, settings.doubleClickThreshold);
@@ -65,9 +92,14 @@ void Game::Update()
         ClickHandler();
     }
 
-    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+    if(!IsMouseButtonDown(MOUSE_BUTTON_LEFT))
     {
         ReleaseHandler();
+    }
+
+    if(IsKeyPressed(KEY_ESCAPE) && state == GAME)
+    {
+        state = PAUSE;
     }
 }
 

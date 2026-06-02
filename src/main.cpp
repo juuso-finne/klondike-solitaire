@@ -9,6 +9,7 @@ int main()
     InitWindow(screenWidth, screenHeight, "Solitaire");
     Game game = Game();
     SetTargetFPS(60);
+    SetExitKey(KEY_NULL);
 
     while (!WindowShouldClose())
     {
