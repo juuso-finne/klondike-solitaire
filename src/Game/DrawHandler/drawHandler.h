@@ -15,6 +15,7 @@ class DrawHandler
 {
     public:
         DrawHandler(Game *aGame);
+        ~DrawHandler();
         Game *game;
         Texture2D cardSpriteSheet;
 

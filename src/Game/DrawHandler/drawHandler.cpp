@@ -11,6 +11,11 @@ DrawHandler::DrawHandler(Game *aGame)
     dropdownMenuState = {{DECK_CYCLES, false}, {CARDS_DEALT, false}};
 }
 
+DrawHandler::~DrawHandler()
+{
+    UnloadTexture(cardSpriteSheet);
+}
+
 void DrawHandler::Draw(bool debugMode)
 {
     BeginDrawing();
