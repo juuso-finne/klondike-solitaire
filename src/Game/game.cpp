@@ -139,5 +139,6 @@ void Game::CheckWinState()
         }
     }
 
+    drawHandler.ResetWinAnimation();
     state = WIN;
 }

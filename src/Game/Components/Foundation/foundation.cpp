@@ -1,4 +1,5 @@
 #include "foundation.h"
+#include "../../DrawHandler/drawHandler.h"
 
 void Foundation::Draw(Texture2D &spritesheet, bool debugMode)
 {

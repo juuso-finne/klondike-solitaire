@@ -3,10 +3,13 @@
 #include "../../../Card/card.h"
 
 class Game;
+class DrawHandler;
+
 
 class Foundation: CardDestination, CardSource
 {
     friend class Game;
+    friend class DrawHandler;
 
     public:
         void Draw(Texture2D &spritesheet, bool debugMode = false);

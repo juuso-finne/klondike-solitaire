@@ -3,6 +3,8 @@
 #include <map>
 #include <vector>
 #include "../gamestate.h"
+#include "../../Card/card.h"
+#include <deque>
 
 enum DropdownMenu
 {
@@ -30,6 +32,7 @@ class DrawHandler
         void DrawPauseMenu();
 
         void GameStateButton(float baseY, int row, const char *text, GameState newState);
+        void ResetWinAnimation();
 
     private:
         class WinAnimation
@@ -38,9 +41,14 @@ class DrawHandler
                 WinAnimation(Game *aGame);
                 void Draw(Texture2D &spritesheet, bool debugMode = false);
                 void Update();
+                void Reset();
             private:
                 Game *game;
-                bool reset;
+                bool uninitializedCursor;
+                bool playing;
+
+                Card currentCard;
+                std::deque<std::pair<Card, Vector2>> trail;
 
                 int index;
                 Vector2 cursor;

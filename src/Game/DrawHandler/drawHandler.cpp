@@ -20,10 +20,7 @@ void DrawHandler::Draw(bool debugMode)
 {
     BeginDrawing();
     ClearBackground(BLACK);
-    winAnimation.Update();
-    winAnimation.Draw(cardSpriteSheet);
-    EndDrawing();
-    return;
+
     switch (game -> state)
     {
         case MAIN_MENU:
@@ -40,6 +37,11 @@ void DrawHandler::Draw(bool debugMode)
 
         case PAUSE:
             DrawPauseMenu();
+            break;
+
+        case WIN:
+            winAnimation.Update();
+            winAnimation.Draw(cardSpriteSheet);
             break;
 
         default:
@@ -135,4 +137,9 @@ void DrawHandler::GameStateButton(float baseY, int row, const char *text, GameSt
     {
         game -> state = newState;
     }
+}
+
+void DrawHandler::ResetWinAnimation()
+{
+    winAnimation.Reset();
 }
