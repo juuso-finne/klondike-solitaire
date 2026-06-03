@@ -11,25 +11,31 @@ class Game
 {
     public:
         Game();
+        GameState state;
 
         void Reset();
         void Update();
         void Draw(bool debugMode = false);
 
         void ClickHandler();
+        void DoubleClickHandler();
         void ReleaseHandler();
 
         GameSettings settings;
-        DrawHandler drawHandler;
 
         std::vector<FixedColumn> columns;
         std::vector<Foundation> foundations;
+        DrawHandler drawHandler;
         Waste waste;
         Deck deck;
+
+        float doubleClickTimer;
 
         int deckCyclesUsed;
         bool isDragging;
         Column draggedColumn;
+
+        void CheckWinState();
 
         bool CyclesLeft();
 

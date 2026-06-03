@@ -1,4 +1,5 @@
 #include "foundation.h"
+#include "../../DrawHandler/drawHandler.h"
 
 void Foundation::Draw(Texture2D &spritesheet, bool debugMode)
 {
@@ -10,6 +11,11 @@ void Foundation::Draw(Texture2D &spritesheet, bool debugMode)
     {
         cards.back().Draw(position, spritesheet, debugMode);
     }
+}
+
+Vector2 Foundation::GetPosition()
+{
+    return position;
 }
 
 Foundation::Foundation(Vector2 aPosition, Game *aGame)
@@ -52,4 +58,28 @@ bool Foundation::Attach(std::vector<Card> newCards)
 
     cards.push_back(newCards[0]);
     return true;
+}
+
+Rectangle Foundation::GetBoundaries()
+{
+    Vector2 cardSize = Card::GetDimensions();
+    return {position.x, position.y, cardSize.x, cardSize.y};
+}
+
+void Foundation::Restore(std::vector<Card> returnedCards)
+{
+    cards.push_back(returnedCards[0]);
+}
+
+std::vector<Card> Foundation::DetachCards(std::size_t startIndex)
+{
+    std::vector<Card> output = {};
+
+    if (!cards.empty())
+    {
+        output.push_back(cards.back());
+        cards.pop_back();
+    }
+
+    return output;
 }

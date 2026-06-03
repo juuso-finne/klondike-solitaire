@@ -4,6 +4,16 @@
 void Game::ClickHandler()
 {
 
+    if(state == WIN)
+    {
+        state = MAIN_MENU;
+    }
+
+    if (state != GAME)
+    {
+        return;
+    }
+
     if(CheckCollisionPointRec(GetMousePosition(), deck.GetBoundaries()))
     {
         waste.Deal();
@@ -17,12 +27,58 @@ void Game::ClickHandler()
 
     for (FixedColumn &c: columns)
     {
+        if(isDragging)
+        {
+            break;
+        }
+
         if(!c.cards.empty() && CheckCollisionPointRec(GetMousePosition(), c.GetBoundaries()))
         {
             std::size_t startIndex = c.FindClickedIndex();
             draggedColumn.position = c.FindCardPosition(startIndex);
             StartDragging(c, startIndex);
+        }
+    }
+
+    for (Foundation &f: foundations)
+    {
+        if(isDragging)
+        {
+            break;
+        }
+
+        if(!f.cards.empty() && CheckCollisionPointRec(GetMousePosition(), f.GetBoundaries()))
+        {
+            draggedColumn.position = f.position;
+            StartDragging(f);
+        }
+    }
+
+    if (doubleClickTimer > 0)
+    {
+        DoubleClickHandler();
+        return;
+    } else
+    {
+        doubleClickTimer = settings.doubleClickThreshold;
+    }
+}
+
+void Game::DoubleClickHandler()
+{
+    doubleClickTimer = 0;
+
+    for (Foundation &f: foundations)
+    {
+        if(!isDragging)
+        {
             return;
+        }
+
+        if (f.Attach(draggedColumn.cards))
+        {
+            isDragging = false;
+            draggedColumn.cards.clear();
         }
     }
 }

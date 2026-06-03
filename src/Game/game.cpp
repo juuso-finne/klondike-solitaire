@@ -1,9 +1,9 @@
 #include "game.h"
+#include <raymath.h>
 
 Game::Game(): drawHandler(this), waste(this), deck (Deck({settings.margin, settings.margin}))
 {
-    isDragging = false;
-    draggedColumn = Column();
+    state = MAIN_MENU;
 
     for (int i = 0; i < 7 ; i++)
     {
@@ -34,6 +34,10 @@ void Game::Reset()
     deck.Reset();
     origin = nullptr;
     deckCyclesUsed = 0;
+    isDragging = false;
+    doubleClickTimer = 0.0f;
+    draggedColumn = Column();
+    waste.cards.clear();
 
     for (std::size_t i = 0; i < columns.size(); i++){
         FixedColumn *c = &columns[i];
@@ -53,16 +57,55 @@ void Game::Reset()
 
 void Game::Update()
 {
+    CheckWinState();
+
+    switch (state)
+    {
+    case GAME:
+        break;
+
+    case WIN:
+        break;
+
+    case HALT:
+        CloseWindow();
+        exit(0);
+        return;
+
+    case RESET:
+        Reset();
+        state = GAME;
+        return;
+
+    case PAUSE:
+        state = IsKeyPressed(KEY_ESCAPE) ? GAME : PAUSE;
+        return;
+
+    case OPTIONS_MENU:
+        state = IsKeyPressed(KEY_ESCAPE) ? MAIN_MENU : OPTIONS_MENU;
+        return;
+
+    default:
+        return;
+    }
+
     UpdateDragging();
+    doubleClickTimer -= GetFrameTime();
+    doubleClickTimer = Clamp(doubleClickTimer, 0.0f, settings.doubleClickThreshold);
 
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
     {
         ClickHandler();
     }
 
-    if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+    if(!IsMouseButtonDown(MOUSE_BUTTON_LEFT))
     {
         ReleaseHandler();
+    }
+
+    if(IsKeyPressed(KEY_ESCAPE) && state == GAME)
+    {
+        state = PAUSE;
     }
 }
 
@@ -73,5 +116,29 @@ void Game::Draw(bool debugMode)
 
 bool Game::CyclesLeft()
 {
-    return !settings.deckCyclingLimited || deckCyclesUsed < settings.deckCycleLimit;
+    return settings.deckCyclingUnlimited || deckCyclesUsed < settings.deckCycleLimit;
+}
+
+void Game::CheckWinState()
+{
+    if (state != GAME)
+    {
+        return;
+    }
+
+    for(Foundation &f: foundations)
+    {
+        if (f.cards.empty())
+        {
+            return;
+        }
+
+        if(f.cards.back().GetRank() != 13)
+        {
+            return;
+        }
+    }
+
+    drawHandler.ResetWinAnimation();
+    state = WIN;
 }

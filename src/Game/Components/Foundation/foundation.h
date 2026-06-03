@@ -3,13 +3,17 @@
 #include "../../../Card/card.h"
 
 class Game;
+class DrawHandler;
 
-class Foundation: CardDestination
+
+class Foundation: CardDestination, CardSource
 {
     friend class Game;
+    friend class DrawHandler;
 
     public:
         void Draw(Texture2D &spritesheet, bool debugMode = false);
+        Vector2 GetPosition();
 
     protected:
 
@@ -20,6 +24,10 @@ class Foundation: CardDestination
 
         Rectangle GetHitbox();
         bool Attach(std::vector<Card> newCards);
+
+        Rectangle GetBoundaries();
+        void Restore(std::vector<Card> returnedCards);
+        std::vector<Card> DetachCards(std::size_t startIndex = 0);
 
         Vector2 position;
 };
