@@ -1,6 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include <map>
+#include <vector>
 #include "../gamestate.h"
 
 enum DropdownMenu
@@ -29,4 +30,29 @@ class DrawHandler
         void DrawPauseMenu();
 
         void GameStateButton(float baseY, int row, const char *text, GameState newState);
+
+    private:
+        class WinAnimation
+        {
+            public:
+                WinAnimation(Game *aGame);
+                void Draw(Texture2D &spritesheet, bool debugMode = false);
+                void Update();
+            private:
+                Game *game;
+                bool reset;
+
+                int index;
+                Vector2 cursor;
+                Vector2 velocity;
+                Vector2 acceleration;
+
+                bool outOfBounds();
+                void bounce();
+                void setCursor();
+                void advance();
+        };
+
+        WinAnimation winAnimation;
+
 };

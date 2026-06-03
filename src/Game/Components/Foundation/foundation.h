@@ -10,6 +10,7 @@ class Foundation: CardDestination, CardSource
 
     public:
         void Draw(Texture2D &spritesheet, bool debugMode = false);
+        Vector2 GetPosition();
 
     protected:
 

@@ -3,7 +3,7 @@
 #define RAYGUI_IMPLEMENTATION
 #include <raygui.h>
 
-DrawHandler::DrawHandler(Game *aGame)
+DrawHandler::DrawHandler(Game *aGame): winAnimation(WinAnimation(aGame))
 {
     game = aGame;
     cardSpriteSheet = LoadTexture("assets/graphics/card_spritesheet.png");
@@ -20,6 +20,10 @@ void DrawHandler::Draw(bool debugMode)
 {
     BeginDrawing();
     ClearBackground(BLACK);
+    winAnimation.Update();
+    winAnimation.Draw(cardSpriteSheet);
+    EndDrawing();
+    return;
     switch (game -> state)
     {
         case MAIN_MENU:

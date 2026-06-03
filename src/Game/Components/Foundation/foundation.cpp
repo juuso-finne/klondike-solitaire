@@ -12,6 +12,11 @@ void Foundation::Draw(Texture2D &spritesheet, bool debugMode)
     }
 }
 
+Vector2 Foundation::GetPosition()
+{
+    return position;
+}
+
 Foundation::Foundation(Vector2 aPosition, Game *aGame)
 {
     position = aPosition;

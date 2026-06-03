@@ -22,10 +22,10 @@ class Game
         void ReleaseHandler();
 
         GameSettings settings;
-        DrawHandler drawHandler;
 
         std::vector<FixedColumn> columns;
         std::vector<Foundation> foundations;
+        DrawHandler drawHandler;
         Waste waste;
         Deck deck;
 
