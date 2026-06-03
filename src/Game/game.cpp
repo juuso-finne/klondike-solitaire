@@ -3,9 +3,6 @@
 
 Game::Game(): drawHandler(this), waste(this), deck (Deck({settings.margin, settings.margin}))
 {
-    isDragging = false;
-    doubleClickTimer = 0.0f;
-    draggedColumn = Column();
     state = MAIN_MENU;
 
     for (int i = 0; i < 7 ; i++)
@@ -37,6 +34,10 @@ void Game::Reset()
     deck.Reset();
     origin = nullptr;
     deckCyclesUsed = 0;
+    isDragging = false;
+    doubleClickTimer = 0.0f;
+    draggedColumn = Column();
+    waste.cards.clear();
 
     for (std::size_t i = 0; i < columns.size(); i++){
         FixedColumn *c = &columns[i];
@@ -56,9 +57,14 @@ void Game::Reset()
 
 void Game::Update()
 {
+    CheckWinState();
+
     switch (state)
     {
     case GAME:
+        break;
+
+    case WIN:
         break;
 
     case HALT:
@@ -111,4 +117,27 @@ void Game::Draw(bool debugMode)
 bool Game::CyclesLeft()
 {
     return settings.deckCyclingUnlimited || deckCyclesUsed < settings.deckCycleLimit;
+}
+
+void Game::CheckWinState()
+{
+    if (state != GAME)
+    {
+        return;
+    }
+
+    for(Foundation &f: foundations)
+    {
+        if (f.cards.empty())
+        {
+            return;
+        }
+
+        if(f.cards.back().GetRank() != 13)
+        {
+            return;
+        }
+    }
+
+    state = WIN;
 }

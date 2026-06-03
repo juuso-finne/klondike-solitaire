@@ -6,5 +6,6 @@ enum GameState
     GAME,
     PAUSE,
     HALT,
-    RESET
+    RESET,
+    WIN
 };

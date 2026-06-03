@@ -35,6 +35,8 @@ class Game
         bool isDragging;
         Column draggedColumn;
 
+        void CheckWinState();
+
         bool CyclesLeft();
 
         void StartDragging(CardSource &c, std::size_t startIndex = 0);

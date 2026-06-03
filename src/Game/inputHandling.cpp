@@ -3,6 +3,12 @@
 
 void Game::ClickHandler()
 {
+
+    if(state == WIN)
+    {
+        state = MAIN_MENU;
+    }
+
     if (state != GAME)
     {
         return;
