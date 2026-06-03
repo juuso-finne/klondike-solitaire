@@ -19,7 +19,7 @@ DrawHandler::~DrawHandler()
 void DrawHandler::Draw(bool debugMode)
 {
     BeginDrawing();
-    ClearBackground(BLACK);
+    ClearBackground(DARKGREEN);
 
     switch (game -> state)
     {
