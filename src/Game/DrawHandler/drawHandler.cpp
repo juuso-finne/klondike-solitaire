@@ -89,6 +89,10 @@ void DrawHandler::DrawOptionsMenu()
 
     int cycleLimitIndex = game -> settings.deckCycleLimit == 1 ? 0 : 1;
     DrawText("Max. deck passes:", baseX, baseY, 24, WHITE);
+
+    GuiSetStyle(LABEL, TEXT_COLOR_NORMAL, 0xFFFFFFFF);
+    GuiSetStyle(CHECKBOX, BORDER_COLOR_NORMAL, 0xFFFFFFFF);
+    GuiSetStyle(CHECKBOX, TEXT_COLOR_NORMAL, 0xFFFFFFFF);
     GuiCheckBox({baseX + indent, baseY + rowSpacing, 25, 25}, "Unlimited", &(game -> settings.deckCyclingUnlimited));
 
     if (game -> settings.deckCyclingUnlimited)
