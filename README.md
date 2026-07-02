@@ -1,7 +1,7 @@
 # Klondike solitaire
 
 ## How to play
-The goal is to move all cards to four foundation piles, building each suit from Ace to King. In the tableau, cards are arranged in descending order and must alternate colors, and sequences of cards can be moved together.When a face-down card is uncovered, it can be turned face up.
+The goal is to move all cards to four foundation piles, building each suit from Ace to King. In the tableau, cards are arranged in descending order and must alternate colors, and sequences of cards can be moved together. When a face-down card is uncovered, it can be turned face up.
 Cards from the stock are dealt to the waste pile. The topmost card of the waste pile is always available. Cards are dealt either one by one or in groups of three. This can be changed in the settings menu. You can also set the limit on deck passes to 1, 3 or infinite.
 Empty tableau columns can only be filled with a King or a sequence starting with a King. The game is won when all cards have been placed on the foundations.
 
